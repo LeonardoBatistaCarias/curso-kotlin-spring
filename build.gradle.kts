@@ -5,6 +5,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.0"
 	kotlin("jvm") version "1.7.22"
 	kotlin("plugin.spring") version "1.7.22"
+	kotlin("plugin.jpa") version "1.4.21"
 }
 
 group = "com.mercadolivro"
@@ -17,8 +18,15 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+	implementation("com.mysql:mysql-connector-j:8.0.32")
+
+	implementation("org.flywaydb:flyway-core:9.15.2")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
