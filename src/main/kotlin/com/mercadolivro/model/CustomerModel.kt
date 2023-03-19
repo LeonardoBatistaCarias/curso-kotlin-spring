@@ -1,10 +1,8 @@
 package com.mercadolivro.model
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
+import com.mercadolivro.enums.CustomerStatus
+import com.mercadolivro.enums.Role
+import jakarta.persistence.*
 
 @Entity(name = "customer")
 data class CustomerModel(
@@ -17,6 +15,18 @@ data class CustomerModel(
     var name: String,
 
     @Column
-    var email: String
-) {
-}
+    var email: String,
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    var status: CustomerStatus,
+
+    @Column
+    val password: String,
+
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = Role::class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "customer_roles", joinColumns = [JoinColumn(name = "customer_id")])
+    var roles: Set<Role> = setOf()
+)
